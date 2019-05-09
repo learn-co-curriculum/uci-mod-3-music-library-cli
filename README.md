@@ -79,23 +79,23 @@ Song.all #=> [#<Song: @name="Blank Space">]
 
 ### `Song`s and `Artist`s
 
- * Songs belong to an artist and an artist has many songs. Adding a song to an
-   artist is done by calling an `#add_song` method on an instance of the
-   `Artist` class.
- * Songs can be initialized with an optional `artist` argument.
+* Songs belong to an artist and an artist has many songs. Adding a song to an
+  artist is done by calling an `#add_song` method on an instance of the
+  `Artist` class.
+* Songs can be initialized with an optional `artist` argument.
 
 ### `Song`s and `Genre`s
 
-  * Genres have many songs and are initialized with an empty list of songs.
-  * Songs have one genre.
-  * Songs can be initialized with an optional `genre` argument.
+* Genres have many songs and are initialized with an empty list of songs.
+* Songs have one genre.
+* Songs can be initialized with an optional `genre` argument.
 
 ### `Artist`s and `Genre`s
 
-  * Artists have many genres through their songs. Implement a `#genres` method
-    for this association.
-  * Genres have many artists through their songs. Implement an `#artists` method
-    for this association.
+* Artists have many genres through their songs. Implement a `#genres` method
+  for this association.
+* Genres have many artists through their songs. Implement an `#artists` method
+  for this association.
 
 ***Note:*** there are a few tests concerned with switching the `Song#initialize`
 method from setting instance variables for `@artist` and `@genre` to using the
@@ -107,18 +107,20 @@ these tests, make sure those setter methods are only invoked _if_
 `Song#initialize` is called with artist and/or genre arguments. Otherwise, the
 `@artist` and/or `@genre` properties will be initialized as `nil`, and you'll
 have some unexpected consequences in both your code and the test suite.
-  * If we call `Song.new("Song Title", artist_object, genre_object)`, both
-    `Song#artist=` and `Song#genre=` should be invoked.
-  * If we call `Song.new("This Song Has No Artist or Genre")`, neither
-    `Song#artist=` nor `Song#genre=` should be invoked.
+
+* If we call `Song.new("Song Title", artist_object, genre_object)`, both
+  `Song#artist=` and `Song#genre=` should be invoked.
+* If we call `Song.new("This Song Has No Artist or Genre")`, neither
+  `Song#artist=` nor `Song#genre=` should be invoked.
 
 ## Finding
 
 ### Song
 
 First, implement the following two methods in your `Song` class:
-  * Songs should have a `find_by_name` method.
-  * Songs should have a `find_or_create_by_name` method.
+
+* Songs should have a `find_by_name` method.
+* Songs should have a `find_or_create_by_name` method.
 
 ### `Concerns::Findable`
 
@@ -136,39 +138,42 @@ end
 Once the basic module structure is good to go, it's time to code our two class
 methods again:
 
-  * Implement a generic `#find_by_name` method that uses the `.all` method
-    defined by the class to find an instance of the class by name.
-  * Implement a generic `#find_or_create_by_name` method that uses the `.all`
-    method defined by the class to find an instance of the class by name and to
-    create a new instance if a match is not found.
-  * Add this module to your `Genre` and `Artist` class.
+* Implement a generic `#find_by_name` method that uses the `.all` method
+  defined by the class to find an instance of the class by name.
+* Implement a generic `#find_or_create_by_name` method that uses the `.all`
+  method defined by the class to find an instance of the class by name and to
+  create a new instance if a match is not found.
+* Add this module to your `Genre` and `Artist` class.
 
 ## `MusicImporter`
 
 Create a `MusicImporter` class that works with your `Song`, `Genre`, and
 `Artist` objects to import a directory of MP3 files. This class will have the
 following methods:
-  * `#initialize` accepts a file path to a directory of MP3 files.
-  * `#files` returns all of the imported filenames.
-  * `.import` imports all of the files from the library, instantiating a new
+
+* `#initialize` accepts a file path to a directory of MP3 files.
+* `#files` returns all of the imported filenames.
+* `.import` imports all of the files from the library, instantiating a new
     `Song` object for each file.
 
 In addition, add the following pair of methods to your `Song` class:
-  * `.new_from_filename`, which instantiates a new `Song` object based on a
-    provided filename.
-  * `.create_from_filename`, which does the same thing as `.new_from_filename`
+
+* `.new_from_filename`, which instantiates a new `Song` object based on a
+  provided filename.
+* `.create_from_filename`, which does the same thing as `.new_from_filename`
     but also saves the newly-created song to the `@@all` class variable.
 
-## It's CLI time!
+## It's CLI Time
 
 Congrats! You've done the heavy lifting. Now let's wrap it all up in a simple
 CLI so that users can actually interact with our code. Create a
 `MusicLibraryController` class that:
-  * Upon initialization, accepts an optional path to the library of MP3 files,
-    defaulting to `./db/mp3s/`. It should then instantiate a `MusicImporter`
-    object, which it will use to import songs from the specified library.
-  * Has a `#call` method that starts the CLI and prompts the user for input.
-    Read the tests carefully for specifics.
+
+* Upon initialization, accepts an optional path to the library of MP3 files,
+  defaulting to `./db/mp3s/`. It should then instantiate a `MusicImporter`
+  object, which it will use to import songs from the specified library.
+* Has a `#call` method that starts the CLI and prompts the user for input.
+  Read the tests carefully for specifics.
 
 Have fun!
 
@@ -184,4 +189,3 @@ Have fun!
     covers how to change file permissions and how to create an executable file
     to initialize a sandbox environment.
 * [Lab Review](https://www.youtube.com/watch?v=iClea2crypU)
-
